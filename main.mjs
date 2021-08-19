@@ -1,6 +1,7 @@
 import NodeMediaServer from 'node-media-server';
 import express from 'express';
 import express_ws from 'express-ws';
+import path from 'path';
 
 const config = {
     rtmp: {
@@ -30,6 +31,10 @@ function broadcast(msg) {
         conn.send(JSON.stringify(msg));
     }
 }
+
+app.get('/player', function (req, res) {
+    res.sendFile(path.resolve('./player/index.html'));
+})
 
 app.ws('/', function (ws, req) {
     connections.push(ws);
