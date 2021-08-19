@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    <script src="./main.js" type="module"></script>
     <style>
         body {
             background: #0c0c0c;
@@ -24,14 +23,20 @@
     <video id="videoElement" controls></video>
     <script>
         if (flvjs.isSupported()) {
-            const videoElement = document.getElementById('videoElement');
-            const flvPlayer = flvjs.createPlayer({
-                type: 'flv',
-                url: 'ws://192.168.1.4:8000/live/mobile.flv'
-            });
-            flvPlayer.attachMediaElement(videoElement);
-            flvPlayer.load();
-            flvPlayer.play();
+            function init() {
+                var videoElement = document.getElementById('videoElement');
+                var flvPlayer = flvjs.createPlayer({
+                    type: 'flv',
+                    url: 'http://localhost:8000/live/mobile.flv'
+                });
+                flvPlayer.attachMediaElement(videoElement);
+                flvPlayer.load();
+                flvPlayer.play();
+            }
+            window.addEventListener('click', e => {
+                init();
+            })
+            init();
         }
     </script>
 
